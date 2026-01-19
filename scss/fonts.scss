@@ -1,0 +1,42 @@
+@import "mixins";
+// Typography classes
+
+body {
+	font-family: var(--font-primary);
+}
+
+.title-h2 {
+	font-family: var(--font-primary);
+	font-size: var(--font-size-h2);
+	font-style: normal;
+	font-weight: var(--font-weight-bold);
+	line-height: var(--line-height-tight);
+	letter-spacing: var(--letter-spacing-tight);
+}
+
+.title-h3 {
+	font-family: var(--font-primary);
+	font-size: var(--font-size-h3);
+	font-style: normal;
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-normal);
+	letter-spacing: var(--letter-spacing-normal);
+}
+
+.title-h4 {
+	font-family: var(--font-primary);
+	font-size: var(--font-size-h4);
+	font-style: normal;
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-normal);
+	letter-spacing: var(--letter-spacing-normal);
+}
+
+.paragraph-base {
+	font-family: var(--font-primary);
+	font-size: var(--font-size-base);
+	font-style: normal;
+	font-weight: var(--font-weight-normal);
+	line-height: var(--line-height-relaxed);
+	letter-spacing: var(--letter-spacing-relaxed);
+}

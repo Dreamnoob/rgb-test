@@ -1,0 +1,41 @@
+/* html {
+    scroll-behavior: smooth;
+} */
+
+
+body {
+    background-color: #fff;
+    color: #000;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 1332px;
+    padding: 0 var(--space-2);
+    margin: 0 auto;
+}
+
+.site {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+

@@ -1,0 +1,64 @@
+// Grey colors (8)
+$Grey-G50: #e9e9e9;
+$Grey-G60: #cdecea;
+$Grey-G75: #a4a4a4;
+$Grey-G100: #7e7e7e;
+$Grey-G200: #474747;
+$Grey-G300: #2e2e2e;
+$Grey-G400: #212121;
+$Grey-G500: #141414;
+
+// Surface colors (5)
+$Surface-BG: #f3f4f1;
+$Surface-White: #ffffff;
+$Surface-Darker: #edebe7;
+$Surface-Dark: #e5e1da;
+$Surface-Ligher: #f9f9f9;
+
+:root {
+	// Base spacing unit
+	--space-1: 8px;
+	--space-2: 16px;
+	--space-3: 24px;
+	--space-4: 32px;
+	--space-5: 40px;
+	--space-6: 48px;
+	--space-7: 56px;
+	--space-8: 64px;
+	--space-9: 80px;
+
+	// Semantic spacing
+	--section-padding-y: var(--space-9);
+	--heading-margin-bottom: var(--space-6);
+
+	// Colors (Figma palette)
+	--Grey-G50: #{$Grey-G50};
+	--Grey-G60: #{$Grey-G60};
+	--Grey-G75: #{$Grey-G75};
+	--Grey-G100: #{$Grey-G100};
+	--Grey-G200: #{$Grey-G200};
+	--Grey-G300: #{$Grey-G300};
+	--Grey-G400: #{$Grey-G400};
+	--Grey-G500: #{$Grey-G500};
+	--Surface-BG: #{$Surface-BG};
+	--Surface-White: #{$Surface-White};
+	--Surface-Darker: #{$Surface-Darker};
+	--Surface-Dark: #{$Surface-Dark};
+	--Surface-Ligher: #{$Surface-Ligher};
+
+	// Typography
+	--font-primary: 'Manrope', sans-serif;
+	--font-weight-normal: 400;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+	--line-height-tight: 1.16;
+	--line-height-normal: 1.2;
+	--line-height-relaxed: 1.48;
+	--letter-spacing-tight: -1px;
+	--letter-spacing-normal: -0.5px;
+	--letter-spacing-relaxed: 0.25px;
+	--font-size-h2: 48px;
+	--font-size-h3: 42px;
+	--font-size-h4: 32px;
+	--font-size-base: 18px;
+}

@@ -1,0 +1,598 @@
+---
+description: "ACF JSON fields development rules and best practices for WordPress themes"
+globs:
+  - "**/acf-json/**/*.json"
+  - "**/acf-json/*.json"
+  - "acf-json/**/*.json"
+  - "acf-json/*.json"
+alwaysApply: true
+---
+
+# ACF JSON Fields Development Rules
+
+This document outlines the best practices for creating and managing ACF (Advanced Custom Fields) JSON field definitions in WordPress themes.
+
+## Key Principles
+- Follow WordPress coding standards and best practices.
+- Use descriptive field names that match CSS classes when possible.
+- Implement proper data validation and sanitization.
+- Create intuitive field labels for administrators.
+- Use appropriate field types for different content types.
+- Implement proper fallback values and default content.
+- **Use `instructions` only when it's truly necessary** — avoid adding instructions for fields where the label is self-explanatory.
+
+## ACF JSON Structure
+
+### Basic Field Structure
+```json
+{
+    "key": "field_unique_key",
+    "label": "Human Readable Label",
+    "name": "field_name",
+    "aria-label": "",
+    "type": "field_type",
+    "required": 0,
+    "conditional_logic": 0,
+    "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+    }
+}
+```
+
+### Field Instructions Usage
+
+**CRITICAL RULE**: Use `instructions` only when it's truly necessary. Avoid adding instructions for fields where the label is self-explanatory.
+
+#### When to Use Instructions
+- When the field purpose is not obvious from the label
+- When specific format requirements exist (e.g., "Format: YYYY-MM-DD")
+- When explaining conditional behavior or fallbacks
+- When providing technical context (e.g., "If not set, default video from theme will be used")
+
+#### When NOT to Use Instructions
+- Simple text fields with clear labels
+- Image fields where the label explains the purpose
+- Standard form fields (tabs, groups, basic inputs)
+- Fields where the label is descriptive enough
+
+#### Good Example (Instructions Needed)
+```json
+{
+    "key": "field_video_file",
+    "label": "Video File",
+    "name": "video_file",
+    "type": "file",
+    "instructions": "If not set, default video from theme will be used",
+    "mime_types": "mp4,webm,mov"
+}
+```
+
+#### Bad Example (Unnecessary Instructions)
+```json
+{
+    "key": "field_hero_title",
+    "label": "Заголовок",
+    "name": "hero_title",
+    "type": "text",
+    "instructions": "Головний заголовок h1"
+}
+```
+The label "Заголовок" is clear enough — instructions are redundant.
+
+## Field Types and Best Practices
+
+### Text Fields
+```json
+{
+    "key": "field_text_example",
+    "label": "Text Field Label",
+    "name": "text_field_name",
+    "type": "text",
+    "default_value": "",
+    "maxlength": "",
+    "placeholder": "",
+    "prepend": "",
+    "append": ""
+}
+```
+
+### Textarea Fields
+```json
+{
+    "key": "field_textarea_example",
+    "label": "Textarea Field Label",
+    "name": "textarea_field_name",
+    "type": "textarea",
+    "default_value": "",
+    "maxlength": "",
+    "rows": 3,
+    "placeholder": "",
+    "new_lines": ""
+}
+```
+
+### WYSIWYG Fields
+```json
+{
+    "key": "field_wysiwyg_example",
+    "label": "WYSIWYG Field Label",
+    "name": "wysiwyg_field_name",
+    "type": "wysiwyg",
+    "default_value": "",
+    "tabs": "all",
+    "toolbar": "full",
+    "media_upload": 1,
+    "delay": 0
+}
+```
+
+### Image Fields
+```json
+{
+    "key": "field_image_example",
+    "label": "Image Field Label",
+    "name": "image_field_name",
+    "type": "image",
+    "return_format": "array",
+    "library": "all",
+    "min_width": "",
+    "min_height": "",
+    "min_size": "",
+    "max_width": "",
+    "max_height": "",
+    "max_size": "",
+    "mime_types": "",
+    "preview_size": "medium"
+}
+```
+
+### Gallery Fields
+```json
+{
+    "key": "field_gallery_example",
+    "label": "Gallery Field Label",
+    "name": "gallery_field_name",
+    "type": "gallery",
+    "return_format": "array",
+    "library": "all",
+    "min": 0,
+    "max": 0,
+    "min_width": "",
+    "min_height": "",
+    "min_size": "",
+    "max_width": "",
+    "max_height": "",
+    "max_size": "",
+    "mime_types": "",
+    "insert": "append",
+    "preview_size": "medium"
+}
+```
+
+### File Fields
+```json
+{
+    "key": "field_file_example",
+    "label": "File Field Label",
+    "name": "file_field_name",
+    "type": "file",
+    "return_format": "array",
+    "library": "all",
+    "min_size": "",
+    "max_size": "",
+    "mime_types": "mp4,webm,mov"
+}
+```
+
+### Link Fields
+```json
+{
+    "key": "field_link_example",
+    "label": "Link Field Label",
+    "name": "link_field_name",
+    "type": "link",
+    "return_format": "array"
+}
+```
+
+### Repeater Fields
+```json
+{
+    "key": "field_repeater_example",
+    "label": "Repeater Field Label",
+    "name": "repeater_field_name",
+    "type": "repeater",
+    "collapsed": "",
+    "min": 0,
+    "max": 0,
+    "layout": "table",
+    "button_label": "Add Item",
+    "sub_fields": [
+        {
+            "key": "field_repeater_sub_field",
+            "label": "Sub Field Label",
+            "name": "sub_field_name",
+            "type": "text"
+        }
+    ]
+}
+```
+
+### Group Fields
+```json
+{
+    "key": "field_group_example",
+    "label": "Group Field Label",
+    "name": "group_field_name",
+    "type": "group",
+    "layout": "block",
+    "sub_fields": [
+        // Sub fields here
+    ]
+}
+```
+
+## Field Naming Conventions
+
+### Naming Strategy
+- **Field names**: Use snake_case matching CSS class names when possible
+- **Keys**: Use descriptive prefixes (e.g., `field_product_main_`, `field_section_`)
+- **Labels**: Use clear, descriptive Ukrainian labels for administrators
+- **Groups**: Organize related fields into logical groups
+
+### Examples
+```json
+// Good naming
+{
+    "key": "field_product_main_img",
+    "label": "Головне зображення продукту",
+    "name": "product_main_img"
+}
+
+// Bad naming
+{
+    "key": "field1",
+    "label": "Image",
+    "name": "img"
+}
+```
+
+## Field Organization
+
+### Group Structure
+```json
+{
+    "key": "group_template_name",
+    "title": "Template Fields",
+    "fields": [
+        {
+            "key": "field_section_group",
+            "label": "Section Name",
+            "name": "section_group",
+            "type": "group",
+            "layout": "block",
+            "sub_fields": [
+                // Section-specific fields
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post_type_name"
+            }
+        ]
+    ]
+}
+```
+
+## Default Values and Fallbacks
+
+### Setting Default Values
+```json
+{
+    "key": "field_with_default",
+    "label": "Field with Default",
+    "name": "field_name",
+    "type": "text",
+    "default_value": "Default Text"
+}
+```
+
+### Conditional Logic
+```json
+{
+    "key": "field_conditional",
+    "label": "Conditional Field",
+    "name": "conditional_field",
+    "type": "text",
+    "conditional_logic": [
+        [
+            {
+                "field": "field_trigger",
+                "operator": "==",
+                "value": "1"
+            }
+        ]
+    ]
+}
+```
+
+## Template Integration
+
+### PHP Template Usage
+```php
+<?php
+// Get field group
+$field_group = get_field('field_group_name');
+$field_value = $field_group ? $field_group['field_name'] : null;
+
+// Safe field output
+if ($field_value) {
+    echo esc_html($field_value);
+}
+?>
+```
+
+### Image Field Usage
+```php
+<?php
+$image = get_field('image_field_name');
+if ($image) {
+    echo '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt'] ? $image['alt'] : get_the_title()) . '">';
+}
+?>
+```
+
+### Gallery Field Usage
+```php
+<?php
+$gallery = get_field('gallery_field_name');
+if ($gallery) {
+    foreach ($gallery as $image) {
+        echo '<img src="' . esc_url($image['sizes']['large']) . '" alt="' . esc_attr($image['alt']) . '">';
+    }
+}
+?>
+```
+
+### WYSIWYG Field Usage
+```php
+<?php
+$content = get_field('wysiwyg_field_name');
+if ($content) {
+    echo wp_kses_post($content);
+}
+?>
+```
+
+## Security Best Practices
+
+### Data Sanitization
+- Always use `esc_html()` for text fields
+- Use `esc_url()` for URLs and file paths
+- Use `esc_attr()` for HTML attributes
+- Use `wp_kses_post()` for WYSIWYG content
+
+### Field Validation
+```php
+<?php
+// Validate field exists and has value
+$field_value = get_field('field_name');
+if ($field_value && !empty($field_value)) {
+    // Process field
+}
+?>
+```
+
+## File Organization
+
+### JSON File Structure
+```
+acf-json/
+├── group_template_name.json
+├── group_page_fields.json
+└── group_options_fields.json
+```
+
+### Naming Convention
+- Use descriptive group names
+- Include template or page type in filename
+- Use snake_case for consistency
+
+## ACF Options Pages via JSON (UI export)
+
+ACF lets you create Options Pages via the UI and store them in `acf-json/` (no PHP required). Files of type `ui_options_page_*.json` are automatically loaded when JSON sync is enabled.
+
+### Приклад Options Page JSON
+```json
+{
+    "key": "ui_options_page_6904afdd8c632",
+    "title": "Загальні налаштування",
+    "active": true,
+    "menu_order": 0,
+    "page_title": "Загальні налаштування",
+    "menu_slug": "global-settings",
+    "parent_slug": "none",
+    "advanced_configuration": 0,
+    "icon_url": "",
+    "menu_title": "",
+    "position": "",
+    "redirect": 0,
+    "description": "",
+    "menu_icon": { "type": "dashicons", "value": "dashicons-admin-generic" },
+    "update_button": "Оновити",
+    "updated_message": "Опції оновлено",
+    "capability": "edit_posts",
+    "data_storage": "options",
+    "post_id": "",
+    "autoload": 0,
+    "modified": 1761914865
+}
+```
+
+### Linking Field Groups to the Options Page
+- In your field group, use the location rule with `options_page` and set the value to the `menu_slug` of your Options Page.
+
+```json
+{
+  "key": "group_site_settings",
+  "title": "Налаштування сайту",
+  "fields": [ /* ... */ ],
+  "location": [
+    [
+      { "param": "options_page", "operator": "==", "value": "global-settings" }
+    ]
+  ],
+  "active": true
+}
+```
+
+### Usage in templates
+```php
+<?php
+$value = get_field('field_name', 'option');
+?>
+```
+
+### Recommendations
+- Keep `ui_options_page_*.json` and related `group_*.json` in `acf-json/`.
+- Avoid default values in fields; prefer checks and fallbacks in templates.
+- For multiple Options Pages, use unique `menu_slug` values and separate field groups.
+
+## Common Patterns
+
+### Section with Image and Content
+```json
+{
+    "key": "field_section_group",
+    "label": "Section Name",
+    "name": "section_group",
+    "type": "group",
+    "sub_fields": [
+        {
+            "key": "field_section_img",
+            "label": "Section Image",
+            "name": "section_img",
+            "type": "image"
+        },
+        {
+            "key": "field_section_content",
+            "label": "Section Content",
+            "name": "section_content",
+            "type": "wysiwyg"
+        }
+    ]
+}
+```
+
+### Video with Fallback
+```json
+{
+    "key": "field_video_file",
+    "label": "Video File",
+    "name": "video_file",
+    "type": "file",
+    "instructions": "If not set, default video from theme will be used",
+    "mime_types": "mp4,webm,mov"
+}
+```
+
+## Error Prevention
+
+### Safe Field Retrieval
+```php
+<?php
+// Always check for null values
+$field_group = get_field('field_group_name');
+$field_value = $field_group ? $field_group['field_name'] : null;
+
+// Use fallback values
+$default_value = 'Default Text';
+$final_value = $field_value ? $field_value : $default_value;
+?>
+```
+
+### Field Existence Checks
+```php
+<?php
+// Check if field exists before using
+if (function_exists('get_field')) {
+    $value = get_field('field_name');
+}
+?>
+```
+
+## Performance Considerations
+
+### Efficient Field Queries
+- Group related fields together
+- Use appropriate field types for data
+- Avoid unnecessary conditional logic
+- Cache field values when appropriate
+
+### Field Optimization
+```json
+{
+    "key": "field_optimized",
+    "label": "Optimized Field",
+    "name": "optimized_field",
+    "type": "text",
+    "required": 0,
+    "conditional_logic": 0,
+    "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+    }
+}
+```
+
+## Maintenance and Updates
+
+### Field Versioning
+- Update `modified` timestamp when changing fields
+- Document field changes in comments
+- Test field changes in development environment
+
+### Field Migration
+- Plan field changes carefully
+- Consider data migration needs
+- Test with existing content
+
+## Troubleshooting
+
+### Common Issues
+1. **Field not appearing**: Check location rules and field keys
+2. **Data not saving**: Verify field names and required settings
+3. **Template errors**: Ensure proper null checks and sanitization
+
+### Debug Information
+```php
+<?php
+// Debug field data
+if (current_user_can('administrator')) {
+    echo '<pre>';
+    print_r(get_field('field_name'));
+    echo '</pre>';
+}
+?>
+```
+
+## Best Practices Summary
+
+1. **Use descriptive field names** that match CSS classes
+2. **Organize fields into logical groups** for better management
+3. **Provide clear labels** in Ukrainian for administrators
+4. **Use `instructions` only when truly necessary** — avoid redundant instructions
+5. **Implement proper fallbacks** and default values
+6. **Use appropriate field types** for different content
+7. **Always sanitize output** in templates
+8. **Test field changes** thoroughly before deployment
+9. **Document field purposes** and usage
+10. **Follow WordPress standards** for security and performance
+11. **Keep field structure consistent** across templates

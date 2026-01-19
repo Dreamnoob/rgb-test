@@ -1,0 +1,325 @@
+{
+    "key": "group_section_cards",
+    "title": "Section Cards Block",
+    "fields": [
+        {
+            "key": "field_section_cards_title",
+            "label": "Заголовок секції",
+            "name": "title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_section_cards_cards",
+            "label": "Картки",
+            "name": "cards",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 3,
+            "max": 12,
+            "collapsed": "",
+            "button_label": "Додати картку",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_section_cards_card_size",
+                    "label": "Розмір картки",
+                    "name": "size",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "4": "4/12 (33.33%)",
+                        "6": "6/12 (50%)",
+                        "8": "8/12 (66.67%)"
+                    },
+                    "default_value": "6",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_section_cards_card_type",
+                    "label": "Тип картки",
+                    "name": "type",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "text": "Текстова",
+                        "image-right": "Контент + зображення праворуч",
+                        "image-bottom": "Контент + зображення знизу"
+                    },
+                    "default_value": "text",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_section_cards_card_bg_color",
+                    "label": "Колір фону",
+                    "name": "bg_color",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "Surface-White": "Surface/White (#FFFFFF)",
+                        "Surface-Ligher": "Surface/Ligher (#F9F9F9)",
+                        "Surface-BG": "Surface/BG (#F3F4F1)",
+                        "Surface-Darker": "Surface/Darker (#EDEBE7)",
+                        "Surface-Dark": "Surface/Dark (#E5E1DA)",
+                        "Grey-G50": "Grey/G50 (#E9E9E9)",
+                        "Grey-G60": "Grey/G60 (#CDCECA)",
+                        "Grey-G75": "Grey/G75 (#A4A4A4)",
+                        "Grey-G100": "Grey/G100 (#7E7E7E)",
+                        "Grey-G200": "Grey/G200 (#474747)",
+                        "Grey-G300": "Grey/G300 (#2E2E2E)",
+                        "Grey-G400": "Grey/G400 (#212121)",
+                        "Grey-G500": "Grey/G500 (#141414)"
+                    },
+                    "default_value": "Surface-White",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 1,
+                    "ui": 1,
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_section_cards_card_title_color",
+                    "label": "Колір заголовка",
+                    "name": "title_color",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "": "За замовчуванням",
+                        "Grey-G50": "Grey/G50 (#E9E9E9)",
+                        "Grey-G60": "Grey/G60 (#CDCECA)",
+                        "Grey-G75": "Grey/G75 (#A4A4A4)",
+                        "Grey-G100": "Grey/G100 (#7E7E7E)",
+                        "Grey-G200": "Grey/G200 (#474747)",
+                        "Grey-G300": "Grey/G300 (#2E2E2E)",
+                        "Grey-G400": "Grey/G400 (#212121)",
+                        "Grey-G500": "Grey/G500 (#141414)",
+                        "Surface-BG": "Surface/BG (#F3F4F1)",
+                        "Surface-White": "Surface/White (#FFFFFF)",
+                        "Surface-Darker": "Surface/Darker (#EDEBE7)",
+                        "Surface-Dark": "Surface/Dark (#E5E1DA)",
+                        "Surface-Ligher": "Surface/Ligher (#F9F9F9)"
+                    },
+                    "default_value": "",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 1,
+                    "ui": 1,
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_section_cards_card_text_color",
+                    "label": "Колір тексту",
+                    "name": "text_color",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "": "За замовчуванням",
+                        "Grey-G50": "Grey/G50 (#E9E9E9)",
+                        "Grey-G60": "Grey/G60 (#CDCECA)",
+                        "Grey-G75": "Grey/G75 (#A4A4A4)",
+                        "Grey-G100": "Grey/G100 (#7E7E7E)",
+                        "Grey-G200": "Grey/G200 (#474747)",
+                        "Grey-G300": "Grey/G300 (#2E2E2E)",
+                        "Grey-G400": "Grey/G400 (#212121)",
+                        "Grey-G500": "Grey/G500 (#141414)",
+                        "Surface-BG": "Surface/BG (#F3F4F1)",
+                        "Surface-White": "Surface/White (#FFFFFF)",
+                        "Surface-Darker": "Surface/Darker (#EDEBE7)",
+                        "Surface-Dark": "Surface/Dark (#E5E1DA)",
+                        "Surface-Ligher": "Surface/Ligher (#F9F9F9)"
+                    },
+                    "default_value": "",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 1,
+                    "ui": 1,
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_section_cards_card_title",
+                    "label": "Заголовок",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_section_cards_card_text",
+                    "label": "Текст",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0
+                },
+                {
+                    "key": "field_section_cards_card_image",
+                    "label": "Зображення",
+                    "name": "image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_section_cards_card_type",
+                                "operator": "!=",
+                                "value": "text"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "preview_size": "medium"
+                },
+                {
+                    "key": "field_section_cards_card_button",
+                    "label": "Кнопка",
+                    "name": "button",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/section-cards"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1768837341
+}

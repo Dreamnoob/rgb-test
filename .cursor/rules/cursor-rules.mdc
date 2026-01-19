@@ -1,0 +1,149 @@
+# Layout Project - Core Understanding
+
+This document establishes the fundamental understanding of this project's architecture, technologies, and coding approach.
+
+## 1. Project Type and Technology Stack
+
+This is a **vanilla adaptive layout project** without frameworks - pure HTML, CSS, and JavaScript.
+
+### What We Use
+- **Build System**: Gulp
+- **Styles**: SCSS → CSS compilation
+- **JavaScript**: ES6+ (no TypeScript)
+- **HTML**: Semantic markup with partials
+- **Responsive**: Desktop-first approach
+
+### What We DON'T Use (Forbidden)
+```javascript
+// ❌ DO NOT use these technologies
+- React, Vue, Angular
+- TypeScript
+- CSS frameworks (Bootstrap, Tailwind)
+- Complex build systems (Webpack, Vite)
+- Separate media queries at file end
+```
+
+## 2. Project Structure
+
+```
+start-theme/
+├── css/                # Compiled CSS files
+├── js/                 # Compiled and vendor JavaScript files
+├── scss/               # Source SCSS files
+│   ├── components/     # Component-specific styles
+│   ├── vendor/         # Third-party SCSS/CSS
+│   ├── mixins/         # SCSS Mixins
+│   ├── _vars.scss      # SCSS Variables
+│   ├── _mixins.scss    # Main mixins file
+│   ├── _fonts.scss     # Font definitions (@font-face)
+│   ├── _text.scss      # Typography classes and base styles
+│   ├── _global.scss    # Global styles
+│   └── main.scss       # Main SCSS entry point
+├── img/                # Image assets
+│   ├── icons/          # SVG icons
+│   └── ...
+├── inc/                # Additional PHP classes and functions
+├── template-parts/     # Reusable template sections (included via get_template_part)
+├── footer.php          # Theme footer template
+├── functions.php       # Core theme functions, hooks, and setup
+├── header.php          # Theme header template
+├── index.php           # Main blog index template
+├── page.php            # Default page template
+├── style.css           # Main theme stylesheet (contains theme header)
+├── gulpfile.js         # Gulp configuration for build tasks
+└── package.json        # Project dependencies and scripts
+```
+
+## 3. Core Development Principles
+
+### CSS/SCSS Approach
+- **BEM methodology** for class naming
+- **Desktop-first responsive design**
+- **Nested media queries** inside classes (NEVER separate)
+- Modular component structure
+
+### Responsive Design Rules
+- **Breakpoints**: 1599px, 1365px, 1023px, 767px
+- **Layout changes** only allowed at 1023px and below
+- **Media queries ALWAYS** inside the corresponding class
+- Gradual size reduction while maintaining proportions
+
+### JavaScript Guidelines
+- ES6+ syntax
+- Modular organization
+- Component-based approach
+- Integration with libraries (Swiper, Choices.js)
+
+### HTML Structure
+- Semantic HTML5 markup
+- Use `@include` for partials
+- Container system approach
+
+## 4. Core Quality Standards
+
+1. **Clean Code** - readable and understandable
+2. **Performance** - optimized for speed
+3. **Modularity** - reusable components
+4. **Adaptivity** - works on all devices
+5. **Structure** - media queries inside classes
+
+## 5. Coding Standards and Formatting
+
+### Language and Comments
+- Write all comments in English
+- Add comments for complex code blocks
+- Use descriptive variable and function names
+
+### Encoding and Formatting
+- Use UTF-8 for all files
+- Indentation: Use tabs for all file types
+- Empty lines between code blocks
+- Consistent formatting throughout
+
+### Browser Compatibility
+- Maintain compatibility with browsers from browserslist in package.json
+- Use semantic versioning
+- Document changes in README.md
+
+## 6. Performance and Optimization
+
+### Image Optimization
+- Optimize images before adding to project
+- Use WebP format where possible
+- Add alt attributes for all images
+- Use descriptive, kebab-case filenames
+
+### Caching and HTTP Requests
+- Minimize HTTP requests through concatenation
+- Use gulp-rev for caching
+- Optimize resource loading order
+
+### Build Optimization
+- Development: Source maps, unminified files
+- Production: Minified, optimized, cached files
+- Backend: Specific build for backend integration
+
+## 7. Security and Validation
+
+### Code Validation
+- Validate HTML through node-w3c-validator
+- Check code for standards compliance
+- Use editorconfig for consistency
+
+### External Resources
+- Use HTTPS for CDN resources
+- Add integrity attributes for external scripts
+- Verify security of third-party libraries
+
+## 8. Available Commands
+
+```bash
+# Development with watch
+npm gulp wp
+
+
+### Other Rule Files
+- `css.mdc` - Detailed CSS/SCSS styling rules
+- `html.mdc` - HTML structure and semantic guidelines
+- `js.mdc` - JavaScript coding standards
+- `structure.mdc` - File organization principles

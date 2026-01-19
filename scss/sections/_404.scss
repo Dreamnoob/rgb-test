@@ -1,0 +1,71 @@
+.error-404 {
+	min-height: calc(100vh - 160px); // Враховуємо висоту хедера та футера
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.error-404-inner {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.error-404-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	max-width: 600px;
+
+	@media (max-width: 767px) {
+		max-width: 100%;
+	}
+}
+
+.error-404-title {
+	margin-bottom: 30px;
+
+	h1 {
+		background: var(--Gradient, linear-gradient(90deg, #21C2C6 0%, #3B7AE0 100%));
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	@media (max-width: 1365px) {
+		margin-bottom: 25px;
+	}
+
+	@media (max-width: 767px) {
+		margin-bottom: 20px;
+	}
+}
+
+.error-404-subtitle {
+	margin-bottom: 30px;
+
+	@media (max-width: 1365px) {
+		margin-bottom: 25px;
+	}
+
+	@media (max-width: 767px) {
+		margin-bottom: 20px;
+	}
+}
+
+.error-404-description {
+	margin-bottom: 50px;
+
+	p {
+		color: #565262;
+	}
+
+	@media (max-width: 1365px) {
+		margin-bottom: 40px;
+	}
+
+	@media (max-width: 767px) {
+		margin-bottom: 30px;
+	}
+}

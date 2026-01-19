@@ -1,0 +1,245 @@
+---
+description: Gulp build system configuration and task organization for the vanilla layout project, including development and production workflows
+globs: ["gulpfile.js", "**/gulpfile.*"]
+alwaysApply: true
+---
+# Gulp Build System Configuration
+
+This document defines the Gulp build system configuration and task organization for the vanilla layout project.
+
+## 1. Gulpfile Structure and Organization
+
+Organize gulpfile.js using modern ES6 syntax and modular task structure.
+
+### Good Example (Correct Structure)
+```javascript
+// gulpfile.js
+const { src, dest, series, parallel, watch } = require('gulp');
+const sass = require('gulp-sass')(require('sass'));
+const browserSync = require('browser-sync').create();
+
+// Environment flag
+const isProd = process.env.NODE_ENV === 'production';
+
+// Task definitions
+function styles() {
+  return src('src/scss/main.scss')
+    .pipe(sass())
+    .pipe(dest('app/css'))
+    .pipe(browserSync.stream());
+}
+
+function scripts() {
+  return src(['src/js/global.js', 'src/js/components/*.js', 'src/js/main.js'])
+    .pipe(concat('main.js'))
+    .pipe(dest('app/js'));
+}
+
+// Export tasks
+exports.default = series(styles, scripts, serve);
+exports.build = series(styles, scripts);
+```
+
+### Bad Example (Incorrect Structure)
+```javascript
+// DON'T: Mix all code without organization
+gulp.task('default', function() {
+  // All logic in one task
+});
+
+// DON'T: Use old gulp syntax
+var gulp = require('gulp');
+```
+
+## 2. Core Build Tasks
+
+Define essential build tasks for different asset types.
+
+### Styles Task
+```javascript
+function styles() {
+  return src('src/scss/main.scss')
+    .pipe(sassGlob()) // Enable glob imports
+    .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer({ cascade: false }))
+    .pipe(isProd ? cleanCSS() : through())
+    .pipe(dest('app/css'))
+    .pipe(browserSync.stream());
+}
+```
+
+### Scripts Task
+```javascript
+function scripts() {
+  return src([
+    'src/js/global.js',
+    'src/js/components/*.js',
+    'src/js/main.js'
+  ])
+    .pipe(concat('main.js'))
+    .pipe(babel({ presets: ['@babel/preset-env'] }))
+    .pipe(isProd ? uglify() : through())
+    .pipe(dest('app/js'));
+}
+```
+
+### HTML Include Task
+```javascript
+function htmlInclude() {
+  return src('src/*.html')
+    .pipe(fileInclude({
+      prefix: '@',
+      basepath: '@file'
+    }))
+    .pipe(isProd ? htmlmin({ collapseWhitespace: true }) : through())
+    .pipe(dest('app'));
+}
+```
+
+## 3. Asset Management Tasks
+
+Handle different types of project assets efficiently.
+
+### Images Task
+```javascript
+function images() {
+  return src('src/img/**/*.{jpg,jpeg,png,svg,gif,webp}')
+    .pipe(dest('app/img'));
+}
+```
+
+### Fonts Task
+```javascript
+function fonts() {
+  return src('src/fonts/**/*')
+    .pipe(dest('app/fonts'));
+}
+```
+
+### Videos Task
+```javascript
+function videos() {
+  return src('src/video/**/*.{mp4,mov,webm}')
+    .pipe(dest('app/video'));
+}
+```
+
+## 4. Vendor Asset Handling
+
+Manage third-party libraries and vendor files.
+
+### Vendor CSS
+```javascript
+function vendorCss() {
+  return src('src/scss/vendor/*.css')
+    .pipe(concat('vendor.css'))
+    .pipe(dest('app/css'));
+}
+```
+
+### Vendor Scripts
+```javascript
+function vendorScripts() {
+  return src('src/js/vendor/*.js')
+    .pipe(dest('app/js/vendor'));
+}
+```
+
+## 5. Development vs Production Optimization
+
+Configure different behaviors for development and production builds.
+
+### Development Features
+- Source maps for debugging
+- Browser Sync for live reloading
+- Unminified files for easier debugging
+- Fast compilation
+
+### Production Features
+```javascript
+// Production-specific optimizations
+.pipe(isProd ? cleanCSS() : through())
+.pipe(isProd ? uglify() : through())
+.pipe(isProd ? rev() : through()) // Cache busting
+.pipe(isProd ? htmlmin({ collapseWhitespace: true }) : through())
+```
+
+## 6. Browser Sync Configuration
+
+Set up development server with live reloading.
+
+### Good Example (Correct Configuration)
+```javascript
+function serve() {
+  browserSync.init({
+    server: {
+      baseDir: './app'
+    },
+    notify: false,
+    open: false
+  });
+
+  // Watch files
+  watch('src/scss/**/*.scss', styles);
+  watch('src/js/**/*.js', scripts);
+  watch('src/**/*.html', htmlInclude);
+  watch('src/img/**/*', images);
+}
+```
+
+## 7. Available Commands and Scripts
+
+Define npm scripts for different build scenarios.
+
+### Package.json Scripts
+```json
+{
+  "scripts": {
+    "dev": "gulp",
+    "build": "NODE_ENV=production gulp build",
+    "backend": "gulp backend",
+    "cache": "gulp cache"
+  }
+}
+```
+
+### Command Usage
+- **`npm run dev`** - Development with watch and Browser Sync
+- **`npm run build`** - Production build with minification
+- **`npm run backend`** - Backend-specific build
+- **`npm run cache`** - Add cache-busting hashes
+
+## 8. Watch Task Configuration
+
+Set up file watching for automatic rebuilds.
+
+```javascript
+function watchFiles() {
+  watch('src/scss/**/*.scss', styles);
+  watch('src/js/**/*.js', scripts);
+  watch('src/partials/*.html', htmlInclude);
+  watch('src/*.html', htmlInclude);
+  watch('src/img/**/*.{jpg,jpeg,png,svg,gif,webp}', images);
+}
+```
+
+## 9. Error Handling and Notifications
+
+Implement proper error handling and user notifications.
+
+```javascript
+function styles() {
+  return src('src/scss/main.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(notify({ message: 'Styles compiled successfully!' }))
+    .pipe(dest('app/css'));
+}
+```
+
+## 10. Code Organization Principles
+
+- **Modular structure**: Each task in separate function
+- **Environment awareness**: Use `isProd` flag for conditional processing
+- **Error handling**: Proper error logging and notifications
+- **Performance**: Efficient file watching and processing
+- **Consistency**: Use tabs for indentation, English comments

@@ -1,0 +1,33 @@
+{
+	"scripts": {
+		"dev": "NODE_ENV=development gulp wp",
+		"build": "NODE_ENV=production gulp build",
+		"watch": "NODE_ENV=development gulp watch",
+		"acf-touch": "node -e \"const fs=require('fs'); const path=require('path'); const dir='acf-json'; if(fs.existsSync(dir)){fs.readdirSync(dir).filter(f=>f.endsWith('.json')).forEach(f=>{const p=path.join(dir,f); const d=JSON.parse(fs.readFileSync(p,'utf8')); d.modified=Math.floor(Date.now()/1000); fs.writeFileSync(p,JSON.stringify(d,null,4)+'\\n');console.log('Updated:',f);});}\""
+	},
+	"devDependencies": {
+		"css-loader": "^6.11.0",
+		"gulp": "^4.0.2",
+		"gulp-autoprefixer": "^8.0.0",
+		"gulp-changed": "^4.0.3",
+		"gulp-clean": "^0.4.0",
+		"gulp-clean-css": "^4.3.0",
+		"gulp-concat": "^2.6.1",
+		"gulp-group-css-media-queries": "^1.2.2",
+		"gulp-notify": "^4.0.0",
+		"gulp-plumber": "^1.2.1",
+		"gulp-sass": "^5.1.0",
+		"gulp-sass-glob": "^1.1.0",
+		"gulp-sourcemaps": "^3.0.0",
+		"gulp-uglify": "^3.0.2",
+		"i": "^0.3.7",
+		"style-loader": "^3.3.4"
+	},
+	"browserslist": [
+		"last 5 versions"
+	],
+	"dependencies": {
+		"browser-sync": "^2.29.3",
+		"sass": "^1.32.0"
+	}
+}

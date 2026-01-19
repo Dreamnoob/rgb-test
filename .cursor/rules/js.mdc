@@ -1,0 +1,239 @@
+---
+description: JavaScript coding standards for the vanilla layout project, emphasizing ES6+ syntax, modular organization, and library integration
+globs: ["**/*.js", "**/*.mjs"]
+alwaysApply: true
+---
+# JavaScript Coding Standards
+
+This document defines the JavaScript coding standards for the vanilla layout project, including ES6+ syntax, DOM manipulation, and library integration.
+
+## 1. File Structure and Organization
+
+Organize JavaScript files in a modular structure for maintainability.
+
+### File Organization
+- **Main file**: `src/js/main.js` with DOMContentLoaded
+- **Components**: `src/js/components/component-name.js`
+- **Vendor scripts**: `src/js/vendor/`
+- **Animations**: `src/js/animation.js`
+
+### Good Example (Correct)
+```javascript
+// src/js/main.js
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize components
+  initHeader();
+  initSliders();
+  initForms();
+});
+
+// src/js/components/slider.js
+function initSliders() {
+  const sliderElement = document.querySelector('.swiper');
+  if (sliderElement) {
+    new Swiper(sliderElement, {
+      slidesPerView: 1,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }
+    });
+  }
+}
+```
+
+### Bad Example (Incorrect)
+```javascript
+// All code in one file without organization
+var slider = document.querySelector('.swiper');
+new Swiper(slider, {}); // No existence check
+
+// Using var instead of const/let
+var buttons = document.querySelectorAll('.btn');
+```
+
+## 2. ES6+ Syntax and Code Style
+
+Use modern JavaScript syntax for better readability and performance.
+
+### Variable Declarations
+```javascript
+// Good - Use const for values that don't change
+const API_URL = 'https://api.example.com';
+const elements = document.querySelectorAll('.item');
+
+// Good - Use let for values that change
+let currentIndex = 0;
+let isVisible = false;
+
+// Bad - Don't use var
+var oldStyle = 'avoid this';
+```
+
+### Functions
+```javascript
+// Good - Arrow functions for short operations
+const handleClick = (event) => {
+  event.preventDefault();
+  // Handle click
+};
+
+// Good - Regular functions for complex operations
+function initializeComponent(element, options = {}) {
+  if (!element) return;
+  
+  const defaultOptions = {
+    autoplay: true,
+    loop: false
+  };
+  
+  const config = { ...defaultOptions, ...options };
+  // Initialize component
+}
+```
+
+## 3. DOM Manipulation Best Practices
+
+Always check element existence and use modern DOM methods.
+
+### Good Example (Correct)
+```javascript
+function initMobileMenu() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('.menu');
+  
+  if (menuToggle && menu) {
+    menuToggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      menu.classList.toggle('menu--open');
+    });
+  }
+}
+```
+
+### Bad Example (Incorrect)
+```javascript
+// No existence check - can cause errors
+const menuToggle = document.querySelector('.menu-toggle');
+menuToggle.addEventListener('click', function() {
+  // This will fail if element doesn't exist
+});
+```
+
+## 4. Library Integration
+
+Integrate external libraries following project conventions.
+
+### Swiper.js
+```javascript
+function initSwiper(selector, options = {}) {
+  const swiperElement = document.querySelector(selector);
+  if (!swiperElement) return;
+  
+  const defaultOptions = {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    }
+  };
+  
+  return new Swiper(swiperElement, { ...defaultOptions, ...options });
+}
+```
+
+### Choices.js
+```javascript
+function initCustomSelect(selector) {
+  const selectElement = document.querySelector(selector);
+  if (!selectElement) return;
+  
+  return new Choices(selectElement, {
+    searchEnabled: false,
+    itemSelectText: '',
+    shouldSort: false
+  });
+}
+```
+
+## 5. Error Handling and Validation
+
+Always include proper error handling and input validation.
+
+### Good Example (Correct)
+```javascript
+function validateForm(formElement) {
+  if (!formElement) {
+    console.error('Form element not found');
+    return false;
+  }
+  
+  const requiredFields = formElement.querySelectorAll('[required]');
+  let isValid = true;
+  
+  requiredFields.forEach(field => {
+    if (!field.value.trim()) {
+      field.classList.add('error');
+      isValid = false;
+    } else {
+      field.classList.remove('error');
+    }
+  });
+  
+  return isValid;
+}
+```
+
+## 6. Performance Considerations
+
+Write efficient code that doesn't impact page performance.
+
+### Event Delegation
+```javascript
+// Good - Use event delegation for dynamic elements
+document.addEventListener('click', (event) => {
+  if (event.target.matches('.dynamic-button')) {
+    handleDynamicClick(event);
+  }
+});
+
+// Bad - Adding listeners to many elements
+document.querySelectorAll('.button').forEach(button => {
+  button.addEventListener('click', handleClick);
+});
+```
+
+### Debouncing
+```javascript
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Usage
+const debouncedResize = debounce(() => {
+  // Handle resize
+}, 250);
+
+window.addEventListener('resize', debouncedResize);
+```
+
+## 7. Code Organization Principles
+
+- **Modular structure**: Each component in separate file
+- **Clear naming**: Use descriptive function and variable names
+- **Comments**: Add comments for complex logic
+- **Error handling**: Always check for element existence
+- **Performance**: Use efficient DOM manipulation techniques

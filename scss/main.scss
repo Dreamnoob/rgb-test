@@ -1,0 +1,21 @@
+// базовые подключения
+@import "vars";
+@import "mixins";
+@import "global";
+
+// подключения компонентов страницы
+@import "components/*.scss";
+@import "sections/*.scss";
+
+// Responsive overrides for CSS custom properties (must be last)
+@media (max-width: 767px) {
+	:root {
+		--section-padding-y: var(--space-6);
+		--heading-margin-bottom: var(--space-4);
+
+		--font-size-h2: 32px;
+		--font-size-h3: 24px;
+		--font-size-h4: 24px;
+		--font-size-base: 16px;
+	}
+}

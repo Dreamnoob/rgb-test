@@ -1,0 +1,199 @@
+---
+description: HTML structure and semantic guidelines for the vanilla layout project, including partials usage, accessibility, and form organization
+globs: ["**/*.html", "**/*.htm"]
+alwaysApply: true
+---
+# HTML Structure and Semantic Guidelines
+
+This document defines the HTML coding standards for semantic markup, partials usage, accessibility, and proper document structure.
+
+## 1. Document Structure and Formatting
+
+Always use semantic HTML5 markup with proper document structure.
+
+### Good Example (Correct)
+```html
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  @include('partials/head.html')
+</head>
+<body>
+  <div class="site">
+    @include('partials/header.html')
+    <main>
+      <div class="container">
+        <!-- Page content -->
+      </div>
+    </main>
+    @include('partials/footer.html')
+  </div>
+  @include('partials/script.html')
+</body>
+</html>
+```
+
+### Bad Example (Incorrect)
+```html
+<!-- Missing DOCTYPE, wrong language, no semantic structure -->
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <div>
+    <!-- Content without semantic tags -->
+  </div>
+</body>
+</html>
+```
+
+## 2. Working with Partials
+
+Partials allow for modular HTML organization and reusability across pages.
+
+### Partials Structure
+- Store partials in `src/partials/` folder
+- Main partials: `head.html`, `header.html`, `footer.html`, `form.html`, `script.html`
+- Use descriptive filenames
+
+### Including Partials
+```html
+<!-- Use this syntax for including partials -->
+@include('partials/filename.html')
+
+<!-- In <head> section -->
+@include('partials/head.html')
+
+<!-- In <body> section -->
+@include('partials/header.html')
+@include('partials/footer.html')
+@include('partials/script.html')
+```
+
+## 3. Semantic HTML5 Tags
+
+Use semantic tags to create meaningful document structure.
+
+### Good Example (Correct)
+```html
+<header class="header">
+  <nav class="nav">
+    <!-- Navigation content -->
+  </nav>
+</header>
+
+<main class="main">
+  <section class="hero">
+    <h1 class="hero-title">Page Title</h1>
+  </section>
+  
+  <section class="content">
+    <article class="article">
+      <!-- Article content -->
+    </article>
+  </section>
+</main>
+
+<footer class="footer">
+  <!-- Footer content -->
+</footer>
+```
+
+### Bad Example (Incorrect)
+```html
+<!-- Using only divs without semantic meaning -->
+<div class="header">
+  <div class="nav">
+    <!-- Navigation content -->
+  </div>
+</div>
+
+<div class="main">
+  <div class="hero">
+    <div class="hero-title">Page Title</div>
+  </div>
+</div>
+```
+
+## 4. Accessibility (A11y)
+
+Ensure your HTML is accessible to all users and assistive technologies.
+
+### Required Attributes
+- Add `alt` attributes for all images
+- Use `aria-label` for navigation buttons
+- Add proper `name` attributes for form fields
+- Use `.visually-hidden` class for screen reader text
+
+### Good Example (Correct)
+```html
+<img src="image.jpg" alt="Descriptive image text">
+
+<button class="menu-toggle" aria-label="Toggle navigation menu">
+  <span class="visually-hidden">Menu</span>
+</button>
+
+<input type="text" name="username" id="username" aria-label="Username">
+```
+
+## 5. Forms Structure
+
+Use consistent form structure with proper labeling and organization.
+
+### Good Example (Correct)
+```html
+<form class="form">
+  <div class="form-group">
+    <label class="form-label" for="email">Email</label>
+    <input class="form-input" type="email" name="email" id="email">
+  </div>
+  
+  <div class="form-group">
+    <label class="form-label" for="message">Message</label>
+    <textarea class="form-input" name="message" id="message"></textarea>
+  </div>
+  
+  <button class="btn btn--primary" type="submit">Submit</button>
+</form>
+```
+
+### Bad Example (Incorrect)
+```html
+<!-- Missing labels, poor structure -->
+<form>
+  <input type="email" placeholder="Email">
+  <textarea placeholder="Message"></textarea>
+  <button>Submit</button>
+</form>
+```
+
+## 6. Meta Tags and Head Section
+
+Include essential meta tags for proper document behavior and SEO.
+
+```html
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+```
+
+## 7. Multi-page Structure
+
+Maintain consistency across multiple pages by following these guidelines:
+
+1. Copy `index.html` to create new pages
+2. Rename files according to content purpose
+3. Use the same structural approach for all pages
+4. Keep partials consistent across pages

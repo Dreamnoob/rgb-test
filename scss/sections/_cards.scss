@@ -1,0 +1,147 @@
+@import "../vars";
+
+.section-cards {
+	padding-top: var(--section-padding-y);
+	padding-bottom: var(--section-padding-y);
+}
+
+.section-cards-title {
+	margin-bottom: var(--heading-margin-bottom);
+	text-align: center;
+}
+
+.cards-grid {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: var(--space-2);
+
+	@media (max-width: 1023px) {
+		grid-template-columns: repeat(6, 1fr);
+	}
+
+	@media (max-width: 767px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+// Модифікатори для різних gap
+// (можна додати через класи або inline стилі)
+
+.card {
+	display: grid;
+	min-height: 324px;
+	border-radius: var(--space-3);
+	overflow: hidden;
+
+	@media (max-width: 767px) {
+		min-height: unset;
+	}
+
+
+	// Size presets
+	&--size-4 {
+		grid-column: span 4;
+
+		@media (max-width: 1023px) {
+			grid-column: span 3;
+		}
+
+		@media (max-width: 767px) {
+			grid-column: span 1;
+		}
+	}
+
+	&--size-6 {
+		grid-column: span 6;
+
+		@media (max-width: 1023px) {
+			grid-column: span 6;
+		}
+
+		@media (max-width: 767px) {
+			grid-column: span 1;
+		}
+	}
+
+	&--size-8 {
+		grid-column: span 8;
+
+		@media (max-width: 1023px) {
+			grid-column: span 6;
+		}
+
+		@media (max-width: 767px) {
+			grid-column: span 1;
+		}
+	}
+
+	// Type presets
+	// &--type-text - text only card (no additional styles needed)
+
+	&--type-image-right {
+		grid-template-columns: 1fr 1fr;
+
+		@media (max-width: 767px) {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	&--type-image-bottom {
+		gap: var(--space-4);
+
+		.card-image {
+			max-height: 224px;
+
+			@media (max-width: 767px) {
+				max-height: 114px;
+
+			}
+		}
+	}
+}
+
+.card-content {
+	display: flex;
+	flex-direction: column;
+	padding: var(--space-4);
+	gap: var(--space-3);
+
+	@media (max-width: 767px) {
+		padding: var(--space-3);
+		gap: var(--space-2);
+	}
+}
+
+.card-image {
+	overflow: hidden;
+
+	img {
+		object-fit: cover;
+	}
+}
+
+.card-button {
+	display: inline-block;
+	width: fit-content;
+	margin-top: auto;
+	padding: var(--space-3) var(--space-4);
+
+	border-radius: var(--space-5);
+	background: var(--Grey-G500);
+	transition: opacity 0.3s ease;
+
+	color: var(--Surface-White);
+	font-family: var(--font-primary);
+	font-size: 16px;
+	font-weight: var(--font-weight-bold);
+	line-height: var(--line-height-normal);
+	letter-spacing: -0.35px;
+
+	@media (max-width: 767px) {
+		padding: var(--space-2) var(--space-3);
+	}
+
+	&:hover {
+		opacity: 0.8;
+	}
+}

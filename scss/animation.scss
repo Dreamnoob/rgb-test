@@ -1,0 +1,116 @@
+@charset "UTF-8";
+/* Індивідуальні анімації */
+[data-animate=fade-up] {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+[data-animate=fade] {
+  opacity: 0;
+}
+
+[data-animate=zoom-in] {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Зміщення зліва */
+[data-animate=slide-left] {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+/* Зміщення справа */
+[data-animate=slide-right] {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+/* Поворот */
+[data-animate=rotate-in] {
+  opacity: 0;
+  transform: rotate(-10deg) scale(0.95);
+}
+
+/* Збільшення з прозорістю */
+[data-animate=grow-fade] {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+/* Flip (переворот) */
+[data-animate=flip-y] {
+  opacity: 0;
+  transform: perspective(400px) rotateY(60deg);
+}
+
+/* Bounce (легкий стрибок) */
+[data-animate=bounce-in] {
+  opacity: 0;
+  transform: scale(0.8) translateY(40px);
+}
+
+/* Blind down (жалюзі зверху вниз) */
+[data-animate=blind-down] {
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+
+/* Групові анімації */
+[data-animate-group=fade-up] > * {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+[data-animate-group=fade] > * {
+  opacity: 0;
+}
+
+[data-animate-group=zoom-in] > * {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+[data-animate-group=slide-left] > * {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+[data-animate-group=slide-right] > * {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+[data-animate-group=rotate-in] > * {
+  opacity: 0;
+  transform: rotate(-10deg) scale(0.95);
+}
+
+[data-animate-group=grow-fade] > * {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+[data-animate-group=flip-y] > * {
+  opacity: 0;
+  transform: perspective(400px) rotateY(60deg);
+}
+
+[data-animate-group=bounce-in] > * {
+  opacity: 0;
+  transform: scale(0.8) translateY(40px);
+}
+
+[data-animate-group=blind-down] > * {
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+
+[data-animate=parallax] {
+  overflow: hidden;
+  will-change: transform;
+}
+[data-animate=parallax] img {
+  height: calc(100% + 50px);
+  transform: translateY(-50px);
+  backface-visibility: hidden;
+  transform: translateZ(0); 
+}

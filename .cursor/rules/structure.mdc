@@ -1,0 +1,84 @@
+---
+description: Project structure and file organization guidelines for the vanilla layout project, including directory structure, configuration files, and organizational principles
+globs: ["package.json", "gulpfile.js", ".gitignore", ".editorconfig", "README.md"]
+alwaysApply: true
+---
+# Project Structure and File Organization (WordPress Theme)
+
+This document defines the project structure and file organization for the High Sierra Pools WordPress theme.
+
+## 1. Directory Structure Overview
+
+The project is a WordPress theme that uses a Gulp-based build system for asset compilation. Source files are processed and the output is used directly by the theme.
+
+```
+start-theme/
+├── css/                # Compiled CSS files
+│   ├── main.css        # Main compiled styles
+│   ├── vendor.css      # Vendor styles
+│   └── animation.css   # Animation styles
+├── js/                 # Compiled and vendor JavaScript files
+│   ├── main.js         # Main JavaScript file
+│   ├── animation.js    # Animation scripts
+│   ├── vendor/         # Vendor JavaScript libraries
+│   └── components/     # Component-specific scripts
+├── scss/               # Source SCSS files
+│   ├── components/     # Component-specific styles
+│   ├── vendor/         # Third-party SCSS/CSS
+│   ├── mixins/         # SCSS Mixins
+│   ├── _vars.scss      # SCSS Variables
+│   ├── _mixins.scss    # Main mixins file
+│   ├── _fonts.scss     # Font definitions (@font-face)
+│   ├── _text.scss      # Typography classes and base styles
+│   ├── _global.scss    # Global styles
+│   └── main.scss       # Main SCSS entry point
+├── img/                # Image assets
+│   ├── icons/          # SVG icons
+│   └── pictures/       # Image files
+├── video/              # Video assets
+├── frontend/           # Original HTML files for reference
+├── inc/                # Additional PHP classes and functions
+├── template-parts/     # Reusable template sections
+│   ├── pages/          # Page-specific templates
+│   │   └── home.php    # Home page template
+│   └── sections/       # Reusable content sections
+│       └── hero.php    # Hero section template
+├── footer.php          # Theme footer template
+├── functions.php       # Core theme functions, hooks, and setup
+├── header.php          # Theme header template
+├── front-page.php      # Front page template
+├── index.php           # Main blog index template
+├── page.php            # Default page template
+├── style.css           # Main theme stylesheet (contains theme header)
+├── gulpfile.js         # Gulp configuration for build tasks
+├── package.json        # Project dependencies and scripts
+└── integration-plan.md # Integration plan documentation
+```
+
+## 2. File Organization Principles
+
+### PHP Organization
+- **`functions.php`**: The core of the theme's functionality. It handles script and style enqueuing, theme setup (menus, image sizes), custom post types, and ACF integration.
+- **`inc/`**: Contains supplementary PHP files, like custom walkers or helper classes, to keep `functions.php` clean.
+- **Template Files (`index.php`, `page.php`, `front-page.php`)**: These are the main WordPress template files that define the structure of different page types.
+- **`template-parts/`**: Organized into two subdirectories:
+  - **`pages/`**: Contains page-specific templates (e.g., `home.php`, `about.php`, `contact.php`)
+  - **`sections/`**: Contains reusable content sections (e.g., `hero.php`, `about.php`, `gallery.php`) that can be included on multiple pages using `get_template_part()`.
+
+### SCSS Organization
+- **`scss/`**: This is the source directory for all styles.
+- **`scss/main.scss`**: The main entry point that imports all other partials and component styles.
+- **`scss/components/`**: Each file corresponds to a specific BEM block or component (e.g., `_hero.scss`, `_faq.scss`).
+- **Build Process**: A Gulp task compiles `scss/main.scss` into `css/main.css` and potentially other files. The final `style.css` in the root is what WordPress recognizes, but the main styling comes from the compiled file enqueued in `functions.php`.
+
+### JavaScript Organization
+- **`js/`**: This directory contains all JavaScript files used by the theme, including vendor libraries and custom scripts.
+- **`js/main.js`**: The main script file, often used for initializing components and event listeners. Other files like `header.js`, `sliders.js` handle specific component logic.
+- **Build Process**: Gulp may be used to concatenate and minify these files for production.
+
+## 3. Build Process
+
+- The project uses **Gulp** (`gulpfile.js`) and **npm** (`package.json`) to automate asset management.
+- **Development**: Running a `dev` or `watch` task (e.g., `gulp` or `npm run dev`) will watch for changes in `scss/` and `js/` files and automatically recompile them.
+- **Production**: A `build` task (e.g., `gulp build` or `npm run build`) will compile, minify, and optimize all assets for the live site.
+- **Asset Enqueuing**: All compiled CSS and JS files are loaded into the theme via `wp_enqueue_style()` and `wp_enqueue_script()` in `functions.php`. 
